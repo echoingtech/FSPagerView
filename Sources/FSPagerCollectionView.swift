@@ -64,3 +64,20 @@ class FSPagerCollectionView: UICollectionView {
     }
     
 }
+
+extension FSPagerCollectionView {
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
+            return super.gestureRecognizerShouldBegin(gestureRecognizer)
+        }
+        let velocity = gestureRecognizer.velocity(in: self)
+        let location = gestureRecognizer.location(in: self)
+
+        if velocity.x > 0 && location.x < 60 {
+            return false
+        }
+        return true
+    }
+    
+}
